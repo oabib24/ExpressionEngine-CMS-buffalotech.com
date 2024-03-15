@@ -1,0 +1,15 @@
+{exp:ce_cache:it id="data-security" seconds="86400"}
+{if segment_2 == 'category' AND segment_4 != ''}
+{embed="data-security/.subcat"}
+{if:elseif segment_2 == '' OR segment_2 == 'category' OR paginated OR archive}
+{embed="data-security/.landing"}
+{if:else}
+{embed="data-security/.detail"}
+{/if}
+{/exp:ce_cache:it}
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+ function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
+</script>
+

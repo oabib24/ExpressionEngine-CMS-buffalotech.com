@@ -1,0 +1,133 @@
+<!-- Template name: .landing -->
+<!DOCTYPE HTML>
+<html>
+	<head>
+		{exp:seo_lite default_title="Data Security"}
+		{embed="includes/.head"}
+		<script src="/js/imagesloaded.pkgd.min.js"></script>
+		<script src="/js/jquery.matchHeight.min.js"></script>
+		<script>
+			$(document).ready(function(){ 
+			  	var $container = $('#resources_wrapper');
+            	$container.imagesLoaded(function(){
+			    	$('.resource').matchHeight({ byRow: true, property: 'height' });
+			    	$('.inner').matchHeight({ byRow: true, property: 'height' });
+				});
+			});
+		</script>
+		<script>
+            $(function(){
+                $('#archive_drop').on('change', function () {
+                    window.location = $(this).val();
+                    $(this).html('<option>Processing, Wait...</option>')
+                })
+            })
+        </script>
+		<script src="https://www.googleoptimize.com/optimize.js?id=OPT-W8X4LDZ"></script>
+	</head>
+	<body id="resources" class="internal fsidenav">
+		<div id="wrapper">
+			{embed="includes/.header"}
+			<section id="content">
+				<main>
+					<div class="inner">
+						<div id="resources_container">
+							{if segment_2 == 'category'}
+							{exp:channel:category_heading channel="data-security"}
+							<h1 class="cat-title {segment_3_category_id}">{category_name}</h1>
+							{/exp:channel:category_heading}
+							{if:else}
+							<h1 class="cat-title">Data Security</h1>
+							{/if}
+							<hr class="bslash {segment_3_category_id}">
+							{embed="resources/.archives"}
+							<div id="resources_wrapper">
+								{exp:channel:entries channel="data-security" {if segment_2 == "category"}category="{segment_3_category_id}"{/if} disable="member_data"}
+								<article class="resource">
+									{if resources_image}
+									<a href="{url_title_path='resources/index'}">{exp:ce_img:single src="{resources_image}" width="330" allow_scale_larger="yes"}</a>
+									{/if}
+									<div class="inner">
+										<h2><a href="{url_title_path='resources/index'}">{title}</a></h2>
+										<p><a href="{url_title_path='resources/index'}">{exp:trunchtml chars="175" inline="..."}{resources_summary}{/exp:trunchtml}</a></p>
+									</div>	
+									<div class="info">
+										<div class="left">
+											<ul>
+												{if "{exp:gwcode_categories entry_id='{entry_id}' limit='1' depth='2'}{cat_name}{/exp:gwcode_categories}" != ""}
+												{exp:gwcode_categories entry_id="{entry_id}" limit="1" depth="2"}
+												<li><a href="/resources/category/{cat_url_title}">{cat_name}</a></li>
+												{/exp:gwcode_categories}
+												{if:else}
+												{exp:gwcode_categories entry_id="{entry_id}" limit="1" depth="1"}
+												<li><a href="/resources/category/{cat_url_title}">{cat_name}</a></li>
+												{/exp:gwcode_categories}
+												{/if}
+											</ul>	
+										</div>
+										<div class="right">
+										{if resources_file}
+											<a href="{resources_file}" download>Download</a>
+										{/if}	
+										</div>
+									</div>	
+								</article>
+								{/exp:channel:entries}
+							</div>
+							{if segment_3=="case-studies"}
+
+								<h2 class="cat-title">Success Stories</h2>
+								<hr class="bslash">
+								<div id="resources_wrapper">
+									{exp:channel:entries channel="data-security" category="7" disable="member_data"}
+									<article class="resource">
+										{if resources_image}
+										<a href="{url_title_path='resources/index'}">{exp:ce_img:single src="{resources_image}" width="330" allow_scale_larger="yes"}</a>
+										{/if}
+										<div class="inner">
+											<h2><a href="{url_title_path='data-security/index'}">{title}</a></h2>
+											<p><a href="{url_title_path='data-security/index'}">{exp:trunchtml chars="175" inline="..."}{resources_summary}{/exp:trunchtml}</a></p>
+										</div>	
+										<div class="info">
+											<div class="left">
+												<ul>
+													{if "{exp:gwcode_categories entry_id='{entry_id}' limit='1' depth='2'}{cat_name}{/exp:gwcode_categories}" != ""}
+													{exp:gwcode_categories entry_id="{entry_id}" limit="1" depth="2"}
+													<li><a href="/data-security/category/{cat_url_title}">{cat_name}</a></li>
+													{/exp:gwcode_categories}
+													{if:else}
+													{exp:gwcode_categories entry_id="{entry_id}" limit="1" depth="1"}
+													<li><a href="/data-security/category/{cat_url_title}">{cat_name}</a></li>
+													{/exp:gwcode_categories}
+													{/if}
+												</ul>	
+											</div>
+											<div class="right">
+											{if resources_file}
+												<a href="{resources_file}" download>Download</a>
+											{/if}
+											</div>	
+										</div>	
+									</article>
+									{/exp:channel:entries}
+								</div>
+								<style>
+									.cat-title{font-size: 24px;float: left;width: 100%}
+								</style>
+
+							{/if}
+						</div>		
+						<div class="clear"></div>	
+					</div>	
+							
+				</main>
+				<aside>
+					{embed="data-security/.nav"}	
+				</aside>
+				<div class="clear"></div>
+			</section>
+			<div id="push"></div>	
+		</div>
+		{embed="includes/.footer"}
+	</body>
+</html>

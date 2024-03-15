@@ -1,0 +1,172 @@
+<!-- Template resources/.detail begin -->
+<!DOCTYPE HTML>
+<html>
+	<head>
+		{exp:seo_lite url_title="{segment_2}"}
+		{embed="includes/.head"}
+		<script type="text/javascript">var switchTo5x=true;</script>
+		<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+		<script type="text/javascript">stLight.options({publisher: "2be52d0b-fac1-4cc3-bcb7-a029e74fea65", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+		<script src="/js/imagesloaded.pkgd.min.js"></script>
+		<script src="/js/jquery.cycle2.js"></script>
+		<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MKPF82X');</script>
+<!-- End Google Tag Manager -->
+
+		{if segment_2 == "novastor-license-for-buffalo-terastations1"}
+		<style type="text/css">
+			.internal.fsidenav main #body .res-body p {display: block !important; text-align: left;}
+			.internal.fsidenav main #body .res-body img {float: left; margin-right: 25px;}
+			
+		</style>
+		{/if}					
+		<style type="text/css">
+			.internal.fsidenav main #product_feed .product {height: 270px !important;}
+		</style>
+		<script>
+            $(document).ready(function(){
+            	var tallestStore = -1;
+            	var $container = $('#blocks');
+            	$container.imagesLoaded(function(){
+			    	$('.product').each(function() {
+			      		tallestStore = tallestStore > $('.product').height() ? tallestStore : $('.product').height();
+			      	});	
+			    	$('.product').each(function() {
+			      		$('.product').height(tallestStore);
+			      	});	
+				});
+                $('#ddform_354_country, #ddform_358, #ddform_360').customSelect(); 
+				$('.iss-trig').on('click',function(e){
+					e.preventDefault();
+					$(this).toggleClass("active");
+					$(this).parent().siblings('.hidden').slideToggle();
+				});   
+            });
+        </script>
+	</head>
+	<body id="resources" class="internal fsidenav">
+	<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MKPF82X"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+		<div id="wrapper">
+			{exp:channel:entries channel="resources" limit="1" disable="pagination|member_data" status="draft|open|For ads emails social" require_entry="yes" show_future_entries="yes"}
+			{if resources_hide_navigation_bar == "Yes"}			
+			{embed="includes/.header-no-menus"}			
+			{if:else}
+			{embed="includes/.header"}
+			header
+			{/if}
+			<section id="content">
+				<main>
+					
+					<div class="inner">
+						<div id="body">
+							<h1>{title}</h1>
+							<hr class="bslash">
+							{if resources_hide_navigation_bar != "Yes"}	
+							<div id="resources_info">
+								{if segment_2 != "why-buffalo-nas"}
+								<div class="left">
+									{if resources_author_name}
+									<h4>By {resources_author_name}<span>{resources_author_title}</span></h4>
+									{/if}
+									{categories limit="1"}<a href="/resources/category/{category_url_title}">{category_name}</a>{/categories}
+									{if resources_hide_date != "Yes"}
+									<span>{entry_date format="%M %d, %Y"}</span> 
+									{/if}
+									{if entry_id == "4291" }<span class="span-text">Complete Form to Claim your Free 10GbE Switch</span>{/if}
+									{if url_title != "novastor-license-for-buffalo-terastations1" && resources_file}
+										<a class="btn" href="{resources_file}" download {if entry_id == "4291" } style="margin-top:50px;"{/if}>Download</a>
+									{/if}
+								</div>
+								{/if}
+								{if url_title != "novastor-license-for-buffalo-terastations1"}
+									<div class="right">
+										<span class='st_share'>Share</span>
+										<span class='st_facebook_custom' displayText='Facebook'></span>
+										<span class='st_twitter_custom' displayText='Tweet'></span>
+										<span class='st_linkedin_custom' displayText='LinkedIn'></span>
+										<a href="https://www.instagram.com/buffaloamericas/" target="_blank"><span class='ig_share' displayText='Instagram'></span></a>
+										<span class='print' onclick='window.print()'></span>
+										<span class='st_email_custom' displayText='Email'></span>
+										<div class="clear"></div>
+									</div>
+									<div class="clear"></div>
+								{/if}
+							</div>
+							{/if}
+							<div class="res-body">	
+								{resources_body}
+								<div class="issues">
+									{resources_issues}
+									{if resources_issues:heading}
+									<hr>
+									<h1>{resources_issues:heading}</h1>
+									<p>&nbsp;</p>
+									{/if}
+									<div class="iss">
+										<h2><span style="color:#0072bc;">Issue:</span><a class="iss-trig" href="#"><img class="dwn-arw" src="/images/site/blu-dwn-arrw.png"></a></h2>
+										<p>{resources_issues:issue_description}</p>
+										<br>
+									</div>
+									<div class="hidden">
+										{resources_issues:hidden_body}
+									</div>
+									{/resources_issues}
+								</div>
+							</div>
+							<!-- This is the table for security notices or any grid that is added -->
+							{if {res_grid:total_rows} > 0}
+							<link href="{stylesheet='support-pages/security-notice'}" media="all" rel="stylesheet" type="text/css" />
+								<div class="res_grid">
+								{res_grid:table id="res_grid_table" cellspacing="0" cellpadding="0" set_classes="y"}
+							</div>
+							{/if}
+							{resources_form}
+							{resources_body_bottom}
+						</div>
+					</div>
+					{if "{resources_related:count}" > 0}
+					<section id="product_feed">
+						<div class="inner">
+							<h2>Related Products</h2>
+							<hr class="bslash">
+						</div>
+						<div id="blocks">
+							{resources_related}
+							<article class="product{switch='|| last'}">
+								<div class="image">
+									<span class="helper"></span>
+									<a href="/products/{resources_related:url_title}/">
+										{resources_related:products_gallery limit="1"}
+										{exp:ce_img:single src="{image:url}" max_width="250" allow_scale_larger="yes"}
+										{/resources_related:products_gallery}
+										<h4>{resources_related:title}</h4>
+									</a>
+								</div>	
+							</article>
+							{/resources_related}
+						</div>
+						<div class="clear"></div>
+					</section>
+					{/if}
+				</main>
+				{if resources_hide_navigation_bar != "Yes"}
+				<aside>
+					{embed="data-security/.nav" category="{categories limit='1'}{category_name}{/categories}" status="{status}"}	
+				</aside>
+				{/if}
+			{/exp:channel:entries}		
+			</section>
+			<div id="push"></div>	
+		</div>
+		{embed="includes/.footer"}
+	</body>
+</html>
+<!-- Template resources/.detail end -->

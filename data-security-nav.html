@@ -1,0 +1,26 @@
+<nav>
+	<ul>
+		{exp:gwcode_categories channel="resources" depth="1" excl_cat_id="176|7|5" style="linear" show_empty="no"}
+		{if cat_name == "White Papers"}
+		<li>
+			<a class="nav_link {if segment_2 == use-cases-white-papers} active{/if}">Use Cases / White Papers / Case Studies</a>
+			<ul class="subnav{if segment_2 == 'use-cases-white-papers'} active{/if}">
+				<li><a href="/resources/use-cases-white-papers"{if segment_3 == '{embed:url}' AND segment_4 == ''} class="active"{/if}>View All</a></li>
+			</ul>
+		</li>
+		{if:else}
+		<li>
+			<a class="nav_link {if segment_3 == cat_url_title} active{/if}">{cat_name}</a>
+			{embed="resources/.nav_subcat" id="{cat_id}" url="{cat_url_title}"}	
+		</li>
+		{/if}
+		{/exp:gwcode_categories}
+		<li>
+			<a class="nav_link_direct" href="/data-security">Data Security</a>	
+		</li>
+		<li>
+			<a class="nav_link_direct" href="/raid">Raid Calculator</a>	
+		</li>
+	</ul>	
+</nav>
+{/if}	

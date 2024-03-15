@@ -1,0 +1,67 @@
+<!-- Template name: .subcat -->
+<!DOCTYPE HTML>
+<html>
+	<head>
+		{exp:seo_lite default_title="Resources"}
+		{embed="includes/.head"}
+		<script src="/js/imagesloaded.pkgd.min.js"></script>
+		<script src="/js/jquery.matchHeight.min.js"></script>
+		<script>
+			$(document).ready(function(){ 
+			  	var $container = $('#resources_wrapper');
+            	$container.imagesLoaded(function(){
+			    	$('.resource').matchHeight({ byRow: true, property: 'height' });
+			    	$('.inner').matchHeight({ byRow: true, property: 'height' });
+				});
+			});
+		</script>
+	</head>
+	<body id="resources" class="internal fsidenav">
+		<div id="wrapper">
+			{embed="includes/.header"}
+			<section id="content">
+				<main>
+					<div class="inner">
+						<div id="resources_container">
+							<h1>{segment_4_category_name}</h1>
+							<hr class="bslash">
+							{embed="resources/.archives"}
+							<div id="resources_wrapper">
+								{exp:channel:entries channel="resources" category="{segment_4_category_id}" disable="member_data"}
+								<article class="resource">
+									{if resources_image}
+									{exp:ce_img:single src="{resources_image}" width="330" allow_scale_larger="yes"}
+									{/if}
+									<div class="inner">
+										<h2><a href="{url_title_path='resources/index'}">{title}</a></h2>
+										<p><a href="{url_title_path='resources/index'}">{exp:trunchtml chars="175" inline="..."}{resources_summary}{/exp:trunchtml}</a></p>
+									</div>	
+									<div class="info">
+										<div class="left">
+											<ul>
+												{exp:gwcode_categories entry_id="{entry_id}" limit="1" depth="2"}
+												<li><a href="/resources/category/{cat_url_title}">{cat_name}</a></li>
+												{/exp:gwcode_categories}
+											</ul>	
+										</div>
+										<div class="right">
+											<a href="{resources_file}" download>Download</a>
+										</div>	
+									</div>	
+								</article>
+								{/exp:channel:entries}
+							</div>
+						</div>		
+						<div class="clear"></div>	
+					</div>	
+							
+				</main>
+				<aside>
+					{embed="data-security/.nav"}	
+				</aside>
+			</section>
+			<div id="push"></div>	
+		</div>
+		{embed="includes/.footer"}
+	</body>
+</html>

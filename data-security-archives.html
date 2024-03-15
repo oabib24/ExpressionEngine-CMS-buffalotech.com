@@ -1,0 +1,8 @@
+<div id="archives">
+	<select class="customselect" id="archive_drop">
+		<option value="/data-security">Archives</option>
+		{exp:channel:month_links channel="resources" limit="50"}
+		<option value="{path='data-security/archives'}"{if segment_3 == year AND segment_4 == month_num} selected="selected"{/if}>{month} {year}</option>
+		{/exp:channel:month_links}
+	</select>
+</div>
