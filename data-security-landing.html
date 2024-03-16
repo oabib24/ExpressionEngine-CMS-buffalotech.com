@@ -4,6 +4,7 @@
 	<head>
 		{exp:seo_lite default_title="Data Security"}
 		{embed="includes/.head"}
+		<script src="/js/owl.carousel.min.js"></script>
 		<script src="/js/imagesloaded.pkgd.min.js"></script>
 		<script src="/js/jquery.matchHeight.min.js"></script>
 		<script>
@@ -33,56 +34,102 @@
 					<div class="inner">
 						<div id="resources_container">
 							{if segment_2 == 'category'}
-							{exp:channel:category_heading channel="data-security"}
-							<h1 class="cat-title {segment_3_category_id}">{category_name}</h1>
-							{/exp:channel:category_heading}
-							{if:else}
-							<h1 class="cat-title">Data Security</h1>
-							{/if}
-							<hr class="bslash {segment_3_category_id}">
-							{embed="resources/.archives"}
-							<div id="resources_wrapper">
-								{exp:channel:entries channel="data-security" {if segment_2 == "category"}category="{segment_3_category_id}"{/if} disable="member_data"}
-								<article class="resource">
-									{if resources_image}
-									<a href="{url_title_path='resources/index'}">{exp:ce_img:single src="{resources_image}" width="330" allow_scale_larger="yes"}</a>
-									{/if}
-									<div class="inner">
-										<h2><a href="{url_title_path='resources/index'}">{title}</a></h2>
-										<p><a href="{url_title_path='resources/index'}">{exp:trunchtml chars="175" inline="..."}{resources_summary}{/exp:trunchtml}</a></p>
-									</div>	
-									<div class="info">
-										<div class="left">
-											<ul>
-												{if "{exp:gwcode_categories entry_id='{entry_id}' limit='1' depth='2'}{cat_name}{/exp:gwcode_categories}" != ""}
-												{exp:gwcode_categories entry_id="{entry_id}" limit="1" depth="2"}
-												<li><a href="/resources/category/{cat_url_title}">{cat_name}</a></li>
-												{/exp:gwcode_categories}
-												{if:else}
-												{exp:gwcode_categories entry_id="{entry_id}" limit="1" depth="1"}
-												<li><a href="/resources/category/{cat_url_title}">{cat_name}</a></li>
-												{/exp:gwcode_categories}
-												{/if}
-											</ul>	
-										</div>
-										<div class="right">
-										{if resources_file}
-											<a href="{resources_file}" download>Download</a>
-										{/if}	
-										</div>
-									</div>	
-								</article>
-								{/exp:channel:entries}
-							</div>
-							{if segment_3=="case-studies"}
-
-								<h2 class="cat-title">Success Stories</h2>
-								<hr class="bslash">
+								{exp:channel:category_heading channel="data-security"}
+								<h1 class="cat-title {segment_3_category_id}">{category_name}</h1>
+								<hr class="bslash {segment_3_category_id}">
+								{if category_description}{category_description}{/if}
+								{embed="data-security/.archives"}
 								<div id="resources_wrapper">
-									{exp:channel:entries channel="data-security" category="7" disable="member_data"}
+									{exp:channel:entries channel="data-security" category="{segment_3_category_id}" disable="member_data"}
+									<div class="owl-carousel">
+										<article class="resource">
+											{if resources_image}
+											<a href="{url_title_path='data-security/index'}">{exp:ce_img:single src="{resources_image}" width="330" allow_scale_larger="yes"}</a>
+											{/if}
+											<div class="inner">
+												<h2><a href="{url_title_path='data-security/index'}">{title}</a></h2>
+												<p><a href="{url_title_path='data-security/index'}">{exp:trunchtml chars="175" inline="..."}{resources_summary}{/exp:trunchtml}</a></p>
+											</div>	
+											<div class="info">
+												<div class="left">
+													<ul>
+														{if "{exp:gwcode_categories entry_id='{entry_id}' limit='1' depth='2'}{cat_name}{/exp:gwcode_categories}" != ""}
+														{exp:gwcode_categories entry_id="{entry_id}" limit="1" depth="2"}
+														<li><a href="/data-security/category/{cat_url_title}">{cat_name}</a></li>
+														{/exp:gwcode_categories}
+														{if:else}
+														{exp:gwcode_categories entry_id="{entry_id}" limit="1" depth="1"}
+														<li><a href="/data-security/category/{cat_url_title}">{cat_name}</a></li>
+														{/exp:gwcode_categories}
+														{/if}
+													</ul>	
+												</div>
+												<div class="right">
+												{if resources_file}
+													<a href="{resources_file}" download>Download</a>
+												{/if}	
+												</div>
+											</div>	
+										</article>
+									</div>
+									{/exp:channel:entries}
+								</div>
+								{/exp:channel:category_heading}
+								<style>
+								div#resources_wrapper {
+									margin-top: 70px;
+								}
+								</style>
+								<script>
+								$(document).ready(function () {
+								  $(".owl-carousel").each(function () {
+
+									  var owl = $(this);
+									  owl.owlCarousel({
+										  loop: true,
+										  margin: 0,
+										  items: 3,
+										  nav: true,
+										  responsive: {
+											  0: {
+												  items: 1
+											  },
+											  480: {
+												  items: 2
+											  },
+											  768: {
+												  items: 3
+											  }
+										  }
+									  });
+									  // Custom Navigation Events
+									  owl.parent().find(".owl-next").click(function () {
+										  owl.trigger('next.owl.carousel');
+									  });
+									  owl.parent().find(".owl-prev").click(function () {
+										  owl.trigger('prev.owl.carousel');
+									  });
+
+									  if (owl.find('.product').length < 3 && $(window).width() >= 768) {
+										  owl.find('.owl-controls').hide()
+									  }
+
+								  });
+							  	})
+								</script>
+							{if:else}
+								<h1 class="cat-title">Data Security</h1>
+								<hr class="bslash {segment_3_category_id}">
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								{embed="data-security/.archives"}
+								<div id="resources_wrapper">
+									{exp:channel:categories channel="data-security"}
+									<h2>{category_name}</h2>
+									<hr class="bslash">
+									{exp:channel:entries channel="data-security" category="{category_id}" disable="member_data" limit="4"}
 									<article class="resource">
 										{if resources_image}
-										<a href="{url_title_path='resources/index'}">{exp:ce_img:single src="{resources_image}" width="330" allow_scale_larger="yes"}</a>
+										<a href="{url_title_path='data-security/index'}">{exp:ce_img:single src="{resources_image}" width="330" allow_scale_larger="yes"}</a>
 										{/if}
 										<div class="inner">
 											<h2><a href="{url_title_path='data-security/index'}">{title}</a></h2>
@@ -105,16 +152,13 @@
 											<div class="right">
 											{if resources_file}
 												<a href="{resources_file}" download>Download</a>
-											{/if}
-											</div>	
+											{/if}	
+											</div>
 										</div>	
 									</article>
 									{/exp:channel:entries}
+									{/exp:channel:categories}
 								</div>
-								<style>
-									.cat-title{font-size: 24px;float: left;width: 100%}
-								</style>
-
 							{/if}
 						</div>		
 						<div class="clear"></div>	
@@ -129,5 +173,6 @@
 			<div id="push"></div>	
 		</div>
 		{embed="includes/.footer"}
+	  	{embed="data-security/public-sector"}
 	</body>
 </html>
