@@ -40,9 +40,9 @@
 								{if category_description}{category_description}{/if}
 								{embed="data-security/.archives"}
 								<div id="resources_wrapper">
+									<div class="owl-carousel" style="margin-bottom:100px;">
 									{exp:channel:entries channel="data-security" category="{segment_3_category_id}" disable="member_data"}
-									<div class="owl-carousel">
-										<article class="resource">
+										<article class="resource" style="width: 95%;margin-left:2.5%;">
 											{if resources_image}
 											<a href="{url_title_path='data-security/index'}">{exp:ce_img:single src="{resources_image}" width="330" allow_scale_larger="yes"}</a>
 											{/if}
@@ -50,8 +50,8 @@
 												<h2><a href="{url_title_path='data-security/index'}">{title}</a></h2>
 												<p><a href="{url_title_path='data-security/index'}">{exp:trunchtml chars="175" inline="..."}{resources_summary}{/exp:trunchtml}</a></p>
 											</div>	
-											<div class="info">
-												<div class="left">
+											<div class="info" style="width:100%; display: inline-flex;">
+												<div class="left" style="width: calc(100% - 50px);">
 													<ul>
 														{if "{exp:gwcode_categories entry_id='{entry_id}' limit='1' depth='2'}{cat_name}{/exp:gwcode_categories}" != ""}
 														{exp:gwcode_categories entry_id="{entry_id}" limit="1" depth="2"}
@@ -64,15 +64,16 @@
 														{/if}
 													</ul>	
 												</div>
-												<div class="right">
+												<div class="right" style="width:50px">
 												{if resources_file}
 													<a href="{resources_file}" download>Download</a>
 												{/if}	
 												</div>
 											</div>	
 										</article>
-									</div>
+									
 									{/exp:channel:entries}
+									</div>
 								</div>
 								{/exp:channel:category_heading}
 								<style>
@@ -99,6 +100,9 @@
 											  },
 											  768: {
 												  items: 3
+											  },
+											  1200: {
+												  items: 4
 											  }
 										  }
 									  });
@@ -157,6 +161,11 @@
 										</div>	
 									</article>
 									{/exp:channel:entries}
+									{if category_id=='231' }
+									<div class="right">
+										<h4><a href="/data-security/category/{category_url_title}" style="text-decoration: underline;">Read More</a></h4>
+									</div>
+									{/if}
 									{/exp:channel:categories}
 								</div>
 							{/if}

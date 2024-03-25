@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        {embed="includes/.head"}
+        <script src="/js/owl.carousel.min.js"></script>
+        <script src="/js/imagesloaded.pkgd.min.js"></script>
+        <script src="/js/jquery.matchHeight.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                var $container = $('#products_wrapper');
+                $container.imagesLoaded(function(){
+                    $('.product').matchHeight({ byRow: true, property: 'height' });
+                });
+            });
+        </script>
+        <script>
+
+            $(document).ready(function(){
+                Cookies.remove('exp_shortlist_session_id');
+                $(".owl-carousel").each(function() {
+
+                    var owl = $(this);
+                    owl.owlCarousel({
+                        loop:true,
+                        margin:0,
+                        items : 3,
+                        nav:true,
+                        responsive:{
+                            0:{
+                                items:1
+                            },
+                            480:{
+                                items:2
+                            },
+                            768:{
+                                items:3
+                            }
+                        }
+                    });
+                    // Custom Navigation Events
+                    owl.parent().find(".owl-next").click(function(){
+                        owl.trigger('next.owl.carousel');
+                    });
+                    owl.parent().find(".owl-prev").click(function(){
+                        owl.trigger('prev.owl.carousel');
+                    });
+
+                    if(owl.find('.product').length < 3 && $(window).width() >= 768){
+                        owl.find('.owl-controls').hide()
+                    }
+
+                });
+
+
+
+                /*var owl = $('.owl-carousel');
+			  	$(".owl-prev").click(function () {
+					owl.trigger('prev.owl.carousel');
+				});
+				$(".owl-next").click(function () {
+					owl.trigger('next.owl.carousel');
+				});
+				$('.owl-carousel').owlCarousel({
+				    loop:true,
+				    margin:0,
+				    responsive:{
+				        0:{
+				            items:3
+				        },
+				        600:{
+				            items:3
+				        },
+				        1000:{
+				            items:3
+				        }
+				    }
+				});*/
+                // Compare
+                /*
+				Commented by @J Aug 8 2016
+                $('a.product_comp').on('click',function(){
+                    $.ajax({
+                        url: $(this).attr('href'),
+                        success: function(data) {
+                            var idCount = data.list_items[data.list_items.length-1];
+                            $('#blocks').find('[data-id="'+idCount.entry_id+'"]').html('Added').css('pointer-events','none');
+                            $('#ajax_items').load('/products/.compare_items',function(){
+                                $('#compare_popup').show();
+                            });
+                        }
+                    });
+                    return false;
+                });*/
+                $('.compare_links').on('click','.product_comp',function(e){
+                    e.preventDefault();
+                    var total_compare_item = $("#compare_submit").data("items");
+                    if($(this).text() == "Compare")
+                    {
+                        // When select compare on product list
+                        if(total_compare_item < 4)
+                        {
+                            var element = $(this).closest('h5');
+                            var entryid = $(this).closest('div').data("entryid");
+                            $.ajax({
+                                url: $(this).attr('href'),
+                                success: function(data) {
+                                    // Do something with the result
+                                    verb = data['get'];
+                                    total_items = data['total_items'];
+                                    var data_href = $("#compare_submit").attr('href');
+                                    console.log(data_href);
+                                    $('#ajax_items').load('/products/.compare_items',function(){
+                                        if(total_items==0)
+                                        {
+                                            $("#compare_submit").data( "item", total_items );
+                                            $("#compare_submit").attr('href',data_href);
+                                            $('#compare_popup').hide();
+                                        }
+                                        else{
+                                            $('#compare_popup').show();
+                                            $("#compare_submit").data( "item", total_items );
+                                            $("#compare_submit").attr('href',data_href);
+                                        }
+                                    });
+                                    $(element).load('/products/compare-links/'+entryid+'/',function(){});
+                                }
+                            });
+                        }
+                        else{
+                            alert("A maximum of 4 products can be selected for comparison.")
+                            return false;
+                        }
+                    }
+                    else{
+                        // When select remove on product list
+                        var element = $(this).closest('h5');
+                        var entryid = $(this).closest('div').data("entryid");
+                        $.ajax({
+                            url: $(this).attr('href'),
+                            success: function(data) {
+                                // Do something with the result
+                                verb = data['get'];
+                                total_items = data['total_items'];
+                                var data_href = $("#compare_submit").attr('href');
+                                console.log(data_href);
+                                $('#ajax_items').load('/products/.compare_items',function(){
+                                    if(total_items==0)
+                                    {
+                                        $("#compare_submit").data( "item", total_items );
+                                        $("#compare_submit").attr('href',data_href);
+                                        $('#compare_popup').hide();
+                                    }
+                                    else{
+                                        $('#compare_popup').show();
+                                        $("#compare_submit").data( "item", total_items );
+                                        $("#compare_submit").attr('href',data_href);
+                                    }
+                                });
+                                $(element).load('/products/compare-links/'+entryid+'/',function(){});
+                            }
+                        });
+                    }
+                    // stop event propagation here
+                    return false;
+                });
+                // Remove Items
+                $('#compare_popup').on('click','.remove_item',function(){
+                    $.ajax({
+                        url: $(this).attr('href'),
+                        success: function(data) {
+                            // Do something with the result
+                            verb = data['get'];
+                            total_items = data['total_items'];
+                            var data_href = $("#compare_submit").attr('href');
+                            $('#ajax_items').load('/products/.compare_items',function(){
+                                if(total_items==0)
+                                {
+                                    $("#compare_submit").data( "item", total_items );
+                                    $("#compare_submit").attr('href',data_href);
+                                    $('#compare_popup').hide();
+                                }
+                                else{
+                                    $('#compare_popup').show();
+                                    $("#compare_submit").data( "item", total_items );
+                                    $("#compare_submit").attr('href',data_href);
+                                }
+                            });
+                            $(".compare_links").each(function(){
+                                var entryid= $(this).data("entryid");
+                                $(this).find('h5').load('/products/compare-links/'+entryid+'/',function(){});
+                            });
+                        }
+                    });
+                    return false;
+                });
+
+                //Remove all items
+                $('#compare_popup').on('click','.compare_remove_all',function(e){
+                    $.ajax({
+                        url: $(this).attr('href'),
+                        success: function(data) {
+                            // Do something with the result
+                            verb = data['get'];
+                            total_items = data['total_items'];
+                            var data_href = $("#compare_submit").attr('href');
+                            $('#ajax_items').load('/products/.compare_items',function(){
+                            if(total_items==0)
+                            {
+                                $("#compare_submit").data( "item", total_items );
+                                $("#compare_submit").attr('href',data_href);
+                                $('#compare_popup').hide();
+                            }
+                            else{
+                                $("#compare_submit").data( "item", total_items );
+                                $("#compare_submit").attr('href',data_href);
+                                $('#compare_popup').hide();
+                            }
+                            });
+                        }
+                    });
+                    $(".compare_links").each(function(){
+                        var entryid= $(this).data("entryid");
+                        $(this).load('/products/compare-links/'+entryid+'/',function(){});
+                    });
+                    return false;
+                });
+
+                //OnClick of compare check for item count
+                $('#compare_popup').on('click','#compare_submit',function(e){
+                    var total_compare_item = $("#compare_submit").data("items");
+                    if(total_compare_item<2)
+                    {
+                        alert("Please select at least 2 products to compare.")
+                        e.preventDefault();
+                        return false;
+                    }
+                    else{
+                        if(total_compare_item > 4)
+                        {
+                            alert("A maximum of 4 products can be selected for comparison.")
+                            return false;
+                        }
+                        else{
+                            ids = "0";
+                            $('.comp_item').each(function(index,item){
+                                if ($(this).data('entry-id')) {
+                                    ids +='|' + $(this).data('entry-id');
+                                }
+                            });
+                            Cookies.set('{segment_3}', ids.replace('0|',''));
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+            });
+        </script>
+    </head>
+    <body id="products" class="internal subcat maincat">
+        <div id="wrapper">
+            {embed="includes/.header"}
+            <section id="content">
+                <nav id="subnav">
+                    <div class="container">
+                        <ul>
+                            {exp:channel:category_heading channel="products"}
+                            <li class="parent"><a href="/products/category/{category_url_title}">{category_name}:</a></li>
+                            {embed="products/.cat_subnav" parent_cat_id="{category_id}" parent_cat_url="{category_url_title}"}
+                            {/exp:channel:category_heading}
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </nav>
+                {exp:channel:category_heading channel="products"}
+                <!-- Top -->
+                <section id="top">
+                    <div class="container">
+                        <div class="left">
+                            <h1>{category_name}</h1>
+                            <hr class="bslash">
+                            <p>{category_description}</p>
+                        </div>
+                        <div class="right">
+                            <img src="{category_image}" alt="{category_name}">
+                        </div>
+                    </div>
+                    <br class="clear">
+                </section>
+                <!-- Products -->
+                <section id="blocks">
+                    {embed="products/.subcat_sliders" parent_cat_id="{category_id}" parent_url_title="{category_url_title}"}
+                </section>
+                {exp:ce_cache:escape}
+                {embed="products/.compare" cat_url="{segment_3}"}
+                {/exp:ce_cache:escape}
+                {/exp:channel:category_heading}
+            </section>
+            <div id="push"></div>
+        </div>
+        {embed="includes/.footer"}
+    </body>
+</html>

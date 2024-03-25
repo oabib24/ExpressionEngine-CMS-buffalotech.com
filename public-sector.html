@@ -1,19 +1,52 @@
 <style>
-.float-container {
-    border: 3px solid #fff;
-    padding: 20px;
-}
-
-.float-child {
-    width: 50%;
-    float: left;
-    padding: 20px;
-    border: 2px solid red;
-} 
-ul#nav_categories{
-	list-style: none;
-    display: grid;
-	margin-top: 70px;
-    row-gap: 30px;
-}
-</style>
+    .float-container {
+        border: 3px solid #fff;
+        padding: 20px;
+    }
+    
+    .float-child {
+        width: 50%;
+        float: left;
+        padding: 20px;
+        border: 2px solid red;
+    } 
+    ul#nav_categories{
+        list-style: none;
+        display: grid;
+        margin-top: 70px;
+        row-gap: 30px;
+    }
+    #resources main .resource .inner{
+        min-height: 200px;
+    }
+    #resources .owl-carousel .owl-controls{
+        display: block !important;
+    }
+    #resources .owl-carousel .owl-controls .owl-nav .owl-prev{
+        cursor: pointer;
+        z-index: 99;
+        position: absolute;
+        top: 100%;
+        left: calc(50%-50px);
+        display: block;
+        width: 40px;
+        height: 41px;
+        background: url(/images/site/slide_cat_prev.png);
+        text-indent: -9999px;
+        border: 2px solid #999;
+    }
+    
+    #resources .owl-carousel .owl-controls .owl-nav .owl-next {
+        cursor: pointer;
+        z-index: 99;
+        position: absolute;
+        top: 100%;
+        right: calc(50%-50px);
+        display: block;
+        width: 40px;
+        height: 41px;
+        background: url(/images/site/cat_slide_next.png);
+        text-indent: -9999px;
+        border: 2px solid #999;
+    }
+    </style>
