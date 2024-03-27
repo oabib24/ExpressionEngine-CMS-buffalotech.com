@@ -130,8 +130,8 @@
 									{exp:channel:categories channel="data-security"}
 									<h2>{category_name}</h2>
 									<hr class="bslash">
-									{exp:channel:entries channel="data-security" category="{category_id}" disable="member_data" limit="4"}
-									<article class="resource">
+									{exp:channel:entries channel="data-security" category="{category_id}" disable="member_data" limit="3"}
+									<article class="resource data-security">
 										{if resources_image}
 										<a href="{url_title_path='data-security/index'}">{exp:ce_img:single src="{resources_image}" width="330" allow_scale_larger="yes"}</a>
 										{/if}
@@ -139,8 +139,8 @@
 											<h2><a href="{url_title_path='data-security/index'}">{title}</a></h2>
 											<p><a href="{url_title_path='data-security/index'}">{exp:trunchtml chars="175" inline="..."}{resources_summary}{/exp:trunchtml}</a></p>
 										</div>	
-										<div class="info">
-											<div class="left">
+										<div class="info" style="display: inline-flex; width: 100%;">
+											<div class="left" style="width: calc(100% - 50px);">
 												<ul>
 													{if "{exp:gwcode_categories entry_id='{entry_id}' limit='1' depth='2'}{cat_name}{/exp:gwcode_categories}" != ""}
 													{exp:gwcode_categories entry_id="{entry_id}" limit="1" depth="2"}
@@ -162,7 +162,7 @@
 									</article>
 									{/exp:channel:entries}
 									{if category_id=='231' }
-									<div class="right">
+									<div class="right read-more">
 										<h4><a href="/data-security/category/{category_url_title}" style="text-decoration: underline;">Read More</a></h4>
 									</div>
 									{/if}
